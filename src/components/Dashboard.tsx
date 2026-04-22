@@ -42,13 +42,43 @@ export default function Dashboard({ checkedItems, moveDate, onSetMoveDate, onNav
   return (
     <div className="dashboard">
       <div className="hero-card">
-        <div className="hero-flag">🇮🇳</div>
-        <h1 className="hero-title">R2I Planner</h1>
-        <p className="hero-subtitle">Your return to India, planned step by step</p>
+        <div className="hero-inner">
+          <div className="hero-brand">
+            <span className="hero-flag">🇮🇳</span>
+            <div>
+              <h1 className="hero-title">R2I Planner</h1>
+              <p className="hero-subtitle">Return to India, planned step by step</p>
+            </div>
+          </div>
+
+          {daysLeft != null ? (
+            <div className="hero-countdown">
+              {daysLeft > 0 ? (
+                <>
+                  <span className="countdown-num">{daysLeft}</span>
+                  <span className="countdown-label">days until home</span>
+                </>
+              ) : daysLeft === 0 ? (
+                <span className="countdown-label">Today's the day! 🎉</span>
+              ) : (
+                <span className="countdown-label">You arrived {Math.abs(daysLeft)} days ago 🏡</span>
+              )}
+              {currentPhase && (
+                <div className="phase-badge" style={{ borderColor: currentPhase.color, color: currentPhase.color }}>
+                  {currentPhase.label}
+                </div>
+              )}
+            </div>
+          ) : (
+            <p className="hero-no-date">Set a move date below to start your countdown</p>
+          )}
+        </div>
       </div>
 
       <div className="section-card">
-        <h2 className="section-title">Your Move Date</h2>
+        <div className="section-title-row">
+          <h2 className="section-title">Move Date</h2>
+        </div>
         <input
           type="date"
           className="date-input"
@@ -56,25 +86,6 @@ export default function Dashboard({ checkedItems, moveDate, onSetMoveDate, onNav
           onChange={e => onSetMoveDate(e.target.value)}
           min={new Date().toISOString().split('T')[0]}
         />
-        {daysLeft != null && (
-          <div className="countdown">
-            {daysLeft > 0 ? (
-              <>
-                <span className="countdown-num">{daysLeft}</span>
-                <span className="countdown-label">days to go</span>
-              </>
-            ) : daysLeft === 0 ? (
-              <span className="countdown-label">Today's the day! 🎉</span>
-            ) : (
-              <span className="countdown-label">Arrived {Math.abs(daysLeft)} days ago 🏡</span>
-            )}
-          </div>
-        )}
-        {currentPhase && (
-          <div className="phase-badge" style={{ borderColor: currentPhase.color, color: currentPhase.color }}>
-            Current phase: <strong>{currentPhase.label}</strong>
-          </div>
-        )}
       </div>
 
       <div className="section-card">
@@ -114,21 +125,21 @@ export default function Dashboard({ checkedItems, moveDate, onSetMoveDate, onNav
       </div>
 
       <div className="quick-nav-grid">
-        <button className="quick-nav-card" onClick={() => onNav('timeline')}>
-          <span className="quick-nav-icon">🗓️</span>
-          <span>Timeline</span>
+        <button className="quick-nav-card" onClick={() => onNav('finance')}>
+          <span className="quick-nav-icon">💰</span>
+          <span>Finance</span>
         </button>
-        <button className="quick-nav-card" onClick={() => onNav('resources')}>
-          <span className="quick-nav-icon">🔗</span>
-          <span>Resources</span>
+        <button className="quick-nav-card" onClick={() => onNav('explore')}>
+          <span className="quick-nav-icon">🗺️</span>
+          <span>Cities</span>
         </button>
         <button className="quick-nav-card" onClick={() => onNav('checklist')}>
           <span className="quick-nav-icon">✅</span>
           <span>Checklist</span>
         </button>
-        <button className="quick-nav-card" onClick={() => onNav('notes')}>
-          <span className="quick-nav-icon">📝</span>
-          <span>Notes</span>
+        <button className="quick-nav-card" onClick={() => onNav('more')}>
+          <span className="quick-nav-icon">📊</span>
+          <span>Projection</span>
         </button>
       </div>
     </div>
