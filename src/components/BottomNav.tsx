@@ -1,13 +1,13 @@
-type Tab = 'dashboard' | 'checklist' | 'timeline' | 'resources' | 'notes'
+export type Tab = 'dashboard' | 'checklist' | 'finance' | 'timeline' | 'settings'
 
 type NavItem = { id: Tab; label: string; icon: string }
 
 const NAV_ITEMS: NavItem[] = [
   { id: 'dashboard', label: 'Home', icon: '🏠' },
   { id: 'checklist', label: 'Checklist', icon: '✅' },
+  { id: 'finance', label: 'Finance', icon: '💰' },
   { id: 'timeline', label: 'Timeline', icon: '🗓️' },
-  { id: 'resources', label: 'Resources', icon: '🔗' },
-  { id: 'notes', label: 'Notes', icon: '📝' },
+  { id: 'settings', label: 'Settings', icon: '⚙️' },
 ]
 
 type Props = { active: Tab; onNav: (t: Tab) => void }
